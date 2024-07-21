@@ -1,0 +1,11 @@
+Manchester United:Man United
+Ipswich Town:Ipswitch
+Wolverhampton Wanderers:Wolves
+Brighton & Hove Albion:Brighton
+Newcastle United:Newcastle
+Nottingham Forest:Nott'm Forest
+AFC Bournemouth:Bournemouth
+West Ham United:West Ham
+Manchester City:Man City
+Leicester City:Leicester
+Tottenham Hotspur:Tottenham
