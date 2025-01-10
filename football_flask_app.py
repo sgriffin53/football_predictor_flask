@@ -179,6 +179,8 @@ def football_page(request):
     outtext += 'The model uses the Gaussian Naive Bayes model to predict results based on past performance.<br>'
     outtext += 'The model is based on data from the 2021 to 2024 seasons.<br>'
     outtext += 'It shows the predictions for the next 30 days of games, and will update throughout the season.<br>'
+    outtext += '<h2>Previous Prediction Results</h2>'
+    outtext += 'You can see how the predictor has performed over the current season on the <a href="/football/results">Results Page</a><br>'
     outtext += '<h2>Predictions</h2>'
     outtext += '<span style="font-family: Arial; font-size: 16px;">'
     predictions = get_predictions()
@@ -192,7 +194,8 @@ def football_page(request):
         kick_off = prediction[5]
         parsed_date = get_fixtures.parse_date(date)
         current_date = datetime.datetime.now()
-        if parsed_date < current_date:
+        one_day_ago = current_date - datetime.timedelta(days=1)
+        if parsed_date < one_day_ago:
             # game already played
             continue
         max_limit = 60 * 60 * 24 * 30
@@ -221,7 +224,13 @@ def football_page(request):
         if home_team != None and away_team != None:
             result = get_single_prediction(home_team, away_team)
             outtext += "<b>Custom prediction:<br><br>"
-            outtext += result + "</b><br>"
+            outtext += result + "</b><br><br>"
+    outtext += '''
+    Backtesting Results:<br><br>
+    Correct WDL:  93 / 184 (50.5%)<br>
+    Correct Scores:  12 / 184 (6.5%)<br>
+    (using 2021-2023 data and backtested on the 2023-2024 season)
+    '''
     outtext += '</span>'
     outtext += get_footer()
     return outtext
